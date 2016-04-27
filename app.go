@@ -11,6 +11,9 @@ func main() {
   router := routes.NewRouter()
   port := os.Getenv("PORT")
 
+  fs := http.StripPrefix("/static/", http.FileServer(http.Dir("static")))
+  router.PathPrefix("/static/").Handler(fs)
+
   if port == "" {
     port = "8080"
   }

@@ -4,7 +4,7 @@ module.exports = {
   },
   output: {
     filename: "index.js",
-    path: __dirname + "/dist"
+    path: __dirname + "/../static"
   },
   module: {
     loaders: [
