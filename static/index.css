@@ -1,0 +1,122 @@
+.month {
+  width: 99%;
+  margin: 0 auto;
+  height: auto;
+}
+
+.linkDay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.linkDay:hover {
+  background: rgba(52, 152, 219, 0.8);
+}
+
+.linkDay:hover < p {
+  color: white;
+}
+
+.links{
+  display: flex;
+  align-content: space-around;
+  /*flex-wrap: wrap;*/
+}
+
+.links li {
+  width: 8.33%;
+  list-style-type: none;
+}
+
+.month ul {
+  display: flex;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+  height: auto;
+}
+
+.month-names {
+}
+
+.month-names li{
+  height: 35px;
+}
+
+.month ul li{
+  width: 14.2%;
+  text-align: center;
+  list-style-type: none;
+}
+.month-days {
+  border-left: solid 1px rgba(189, 195, 199,1.0);
+  border-top: solid 1px rgba(189, 195, 199,1.0);
+}
+
+.month-days li{
+  height: 95px;
+  border-right: 1px solid rgba(189, 195, 199,1.0);
+  border-bottom: 1px solid rgba(189, 195, 199,1.0);
+  position: relative;
+}
+
+.month-days li p{
+  margin-top: 40px;
+  z-index: 100;
+}
+
+.circleEvent{
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  top: 5px;
+  right: 5px;
+  background: rgba(39, 174, 96,1.0);
+  position: absolute;
+  animation-name: littleBig;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+a{
+  text-decoration: none;
+  color: rgba(52, 152, 219,1.0);
+}
+
+
+@keyframes littleBig {
+  0% {
+    width: 20px;
+    height: 20px;
+  }
+  25% {
+    width: 18px;
+    height: 18px;
+    top: 7px;
+    right: 7px;
+  }
+  50% {
+    width: 16px;
+    height: 16px;
+    top: 9px;
+    right: 9px;
+  }
+  75% {
+    width: 18px;
+    height: 18px;
+    top: 7px;
+    right: 7px;
+  }
+  100% {
+    width: 20px;
+    height: 20px;
+    top: 5px;
+    right: 5px;
+  }
+}

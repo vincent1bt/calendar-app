@@ -1,47 +1,21 @@
 import React from 'react';
-import dateObject from "helpers/getDate";
 
-console.log(dateObject());
-
-const Month = () => {
-  //{ monthName }
-  //console.log(monthName);
-
+const Month = ({ name, year, arrayLi }) => {
   return (
     <div className="month">
-      <table>
-        <tbody>
-          <tr>
-            <th>Mon</th>
-            <th>Tue</th>
-            <th>Wed</th>
-            <th>Thu</th>
-            <th>Fri</th>
-            <th>Sat</th>
-            <th>Sun</th>
-          </tr>
-          <tr>
-            <td>John</td>
-            <td>Doe</td>
-          </tr>
-          <tr>
-            <td>Jane</td>
-            <td>Doe</td>
-          </tr>
-          <tr>
-            <td>Jane</td>
-            <td>Doe</td>
-          </tr>
-          <tr>
-            <td>Jane</td>
-            <td>Doe</td>
-          </tr>
-          <tr>
-            <td>Jane</td>
-            <td>Doe</td>
-          </tr>
-        </tbody>
-      </table>
+      <h2>{name} {year}</h2>
+      <ul className="month-names">
+        <li><p>Mon</p></li>
+        <li><p>Tue</p></li>
+        <li><p>Wed</p></li>
+        <li><p>Thu</p></li>
+        <li><p>Fri</p></li>
+        <li><p>Sat</p></li>
+        <li><p>Sun</p></li>
+      </ul>
+      <ul className="month-days">
+        {arrayLi}
+      </ul>
     </div>
   );
 }
