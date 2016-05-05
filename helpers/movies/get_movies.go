@@ -1,16 +1,18 @@
 package moviesHelper
 
 import (
-  _ "fmt"
+  "fmt"
   "io/ioutil"
   "net/http"
+  "os"
 )
 
 func GetMovies() ([]byte, error) {
-  //page := "1"
-  //key := "206e0b6eb85969cd425cce8eda2edb0a"
-  //url := fmt.Sprintf("http://api.themoviedb.org/3/movie/upcoming?page=%s&api_key=%s", page, key)
-  url := "http://127.0.0.1:8000/movies"
+  page := "1"
+  key := os.Getenv("THEMOVIEDB_KEY")
+
+  url := fmt.Sprintf("http://api.themoviedb.org/3/movie/upcoming?page=%s&api_key=%s", page, key)
+  //url := "http://127.0.0.1:8000/movies"
 
   req, err := http.NewRequest("GET", url, nil)
   req.Header.Add("Accept", "application/json")

@@ -1,5 +1,6 @@
 import { normalize, Schema, arrayOf } from 'normalizr';
 import { fromJS } from 'immutable';
+import { isEqual, isObject, isArray, mergeWith } from 'lodash';
 
 const monthSchema = new Schema("months");
 const eventSchema = new Schema("events");
@@ -15,80 +16,42 @@ eventSchema.define({
   reminders: arrayOf(reminderSchema)
 });
 
-const jsonObject = {
-  "months": [
-    {
-      "id": 1,
-      "name": "January",
-      "numberOfDays": "31",
-      "firstDay": "Friday",
-      "events": [
-        {
-          "id": 112,
-          "movies": [
-            {
-              "id": 34234,
-              "image_path": "/zSouWWrySXshPCT4t3UKCQGayyo.jpg",
-              "title": "Civil War",
-              "overview": "good movie"
-            }
-          ],
-          "reminders": [
-            {
-              "id": 324234234,
-              "text": "cook"
-            }
-          ]
-        },
-        {
-          "id": 109,
-          "movies": [
-            {
-              "id": 20848,
-              "image_path": "/zSouWWrySXshPCT4t3UKCQGayyo.jpg",
-              "title": "avengers 3",
-              "overview": "good movie!!!"
-            }
-          ],
-          "reminders": [
-            {
-              "id": 4234234,
-              "text": "cook and sleep"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "name": "February",
-      "numberOfDays": "29",
-      "firstDay": "Monday",
-      "events": [
-        {
-          "id": 223,
-          "movies": [
-            {
-              "id": 134,
-              "image_path": "/zSouWWrySXshPCT4t3UKCQGayyo.jpg",
-              "title": "batman v superman",
-              "overview": "meeh movie"
-            }
-          ],
-          "reminders": [
-            {
-              "id": 234234,
-              "text": "sleep"
-            }
-          ]
-        }
-      ]
-    }
-  ]
+function customizer(objValue, srcValue) {
+  if (isArray(objValue)) {
+    return objValue.concat(srcValue);
+  }
 }
 
-const responseObject = normalize(jsonObject, {
-  months: arrayOf(monthSchema)
-});
+var options = {
+  mergeIntoEntity: function(entityA, entityB, entityKey) {
+    var key;
+    for (key in entityB) {
+      if (!entityB.hasOwnProperty(key)) {
+        continue;
+      }
 
-export default fromJS(responseObject);
+      if (!entityA.hasOwnProperty(key) || isEqual(entityA[key], entityB[key])) {
+        entityA[key] = entityB[key];
+        continue;
+      }
+
+      if (isObject(entityA[key]) && isObject(entityB[key])) {
+        if(!isEqual(entityA[key], entityB[key])) {
+          if (key === "movies") {
+            mergeWith(entityA, entityB, customizer);
+            continue;
+          }
+        }
+      }
+    }
+  }
+};
+
+function normalizer(jsonObject) {
+ const responseObject = normalize(jsonObject, {
+   months: arrayOf(monthSchema)
+ }, options);
+ return responseObject;
+}
+
+export default normalizer;

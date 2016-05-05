@@ -1,14 +1,14 @@
-import { fromJS } from 'immutable';
+import { fromJS, Map } from 'immutable';
 
-const events = (state = {}, action) => {
+const events = (state = Map(), action) => {
   switch (action.type) {
     case 'GET_EVENTS':
-      return action.events;
+      return state.merge(action.events);
     case 'ADD_REMINDER_TO_EVENT':
       return addReminder(state, action);
     default:
       if(action.events) {
-        return action.events;
+        return state.merge(action.events);
       }
       return state;
   }

@@ -1,12 +1,14 @@
-const months = (state = {}, action) => {
+import { Map } from 'immutable';
+
+const months = (state = Map(), action) => {
   switch (action.type) {
     case 'GET_MONTHS':
-      return action.months;
+      return state.merge(action.months);
     case 'ADD_EVENT_TO_MONTH':
       return addEvent(state, action);
     default:
       if(action.months) {
-        return action.months;
+        return state.merge(action.months);
       }
       return state;
   }
