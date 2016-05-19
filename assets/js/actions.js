@@ -5,7 +5,7 @@ import fetch from 'isomorphic-fetch'
 export const putState = () => {
   return dispatch => {
     dispatch(getCurrentDate());
-    return fetch(`http://${window.location.host}/movies`)
+    return fetch(`${window.location.href}/movies`)
       .then((res) => res.json())
       .then((json) => {
         const entities = getData(json.months);
