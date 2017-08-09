@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router'
+import { NavLink } from 'react-router-dom';
 
 const months = [
   "January", "February", "March",
@@ -8,15 +8,25 @@ const months = [
   "November", "December"
 ];
 
-const Nav = months.map((month, index) => {
-    return (
-      <li key={index} >
-              <Link to={`/month/${index + 1}`}
-                    activeClassName="activeMonthLink">
-              </Link>
-              {month}
-      </li>
-    )
-});
+const Nav = () => {
+  return (
+    <nav className="months-nav">
+      <ul className="links">
+        {
+          months.map((month, index) => {
+            return (
+              <li key={index} >
+                <NavLink to={`/month/${index + 1}`}
+                      activeClassName="activeMonthLink">
+                </NavLink>
+                {month}
+              </li>
+            )
+          })
+        }
+      </ul>
+    </nav>
+  )
+};
 
 export default Nav;

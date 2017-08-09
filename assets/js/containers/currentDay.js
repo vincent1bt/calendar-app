@@ -5,8 +5,8 @@ import { createReminder } from 'actions';
 import Day from 'components/Day';
 
 const mapStateToProps = (state, ownProps) => {
-  const monthId = ownProps.params.monthId;
-  const dayId = ownProps.params.dayId;
+  const monthId = ownProps.match.params.monthId;
+  const dayId = ownProps.match.params.dayId;
   const calendar = state.app;
   const eventId = (parseInt(monthId) * 100) + parseInt(dayId);
   const results = getDataDay(calendar.events.get(eventId.toString()), calendar.movies, calendar.reminders);

@@ -1,6 +1,7 @@
 import { Map } from 'immutable';
 
 const movies = (state = Map(), action) => {
+
   switch (action.type) {
     case 'GET_MOVIES':
       return state.merge(action.movies);

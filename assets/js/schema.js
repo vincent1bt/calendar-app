@@ -1,19 +1,29 @@
-import { normalize, Schema, arrayOf } from 'normalizr';
+import { normalize, schema } from 'normalizr';
 import { fromJS } from 'immutable';
 import { isEqual, isObject, isArray, mergeWith } from 'lodash';
 
-const monthSchema = new Schema("months");
-const eventSchema = new Schema("events");
-const movieSchema = new Schema("movies");
-const reminderSchema = new Schema("reminders");
+const eventSchema = new schema.Entity("events");
+const movieSchema = new schema.Entity("movies");
+const reminderSchema = new schema.Entity("reminders");
 
-monthSchema.define({
-  events: arrayOf(eventSchema)
-});
+const monthSchema = new schema.Entity("months",
+  {
+    events: [eventSchema]
+  }
+);
+
+const listSchema = new schema.Entity("list",
+  {
+    months: [monthSchema]
+  },
+  {
+    mergeStrategy: mergeIntoEntity
+  }
+);
 
 eventSchema.define({
-  movies: arrayOf(movieSchema),
-  reminders: arrayOf(reminderSchema)
+  movies: [movieSchema],
+  reminders: [reminderSchema]
 });
 
 function customizer(objValue, srcValue) {
@@ -22,36 +32,34 @@ function customizer(objValue, srcValue) {
   }
 }
 
-var options = {
-  mergeIntoEntity: function(entityA, entityB, entityKey) {
-    var key;
-    for (key in entityB) {
-      if (!entityB.hasOwnProperty(key)) {
-        continue;
-      }
+function mergeIntoEntity(entityA, entityB) {
+  var key;
+  for (key in entityB) {
+    if (!entityB.hasOwnProperty(key)) {
+      continue;
+    }
 
-      if (!entityA.hasOwnProperty(key) || isEqual(entityA[key], entityB[key])) {
-        entityA[key] = entityB[key];
-        continue;
-      }
+    if (!entityA.hasOwnProperty(key) || isEqual(entityA[key], entityB[key])) {
+      entityA[key] = entityB[key];
+      continue;
+    }
 
-      if (isObject(entityA[key]) && isObject(entityB[key])) {
-        if(!isEqual(entityA[key], entityB[key])) {
-          if (key === "movies") {
-            mergeWith(entityA, entityB, customizer);
-            continue;
-          }
+    if (isObject(entityA[key]) && isObject(entityB[key])) {
+      if(!isEqual(entityA[key], entityB[key])) {
+        if (key === "movies") {
+          mergeWith(entityA, entityB, customizer);
+          continue;
         }
       }
     }
   }
-};
+}
 
 function normalizer(jsonObject) {
- const responseObject = normalize(jsonObject, {
-   months: arrayOf(monthSchema)
- }, options);
- return responseObject;
+  const responseObject = normalize(jsonObject, listSchema);
+
+  console.log(responseObject, "responseObject--------------------------------------------");
+  return responseObject;
 }
 
 export default normalizer;

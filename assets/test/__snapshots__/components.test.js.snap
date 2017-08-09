@@ -1,0 +1,160 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components <CreateReminder/> renders 1`] = `
+<div
+  className="reminder-input"
+>
+  <input />
+  <button
+    onClick={[Function]}
+  >
+    Add
+  </button>
+</div>
+`;
+
+exports[`components <Day/> renders 1`] = `
+<div>
+  <section
+    className="titles-day"
+  >
+    <h2>
+      Day 
+      12
+      , 
+      enero
+    </h2>
+  </section>
+  <section
+    className="movies"
+  >
+    <h2
+      className="movies-title"
+    >
+      Movies
+    </h2>
+    <p
+      className="no-events"
+    >
+      No Movies
+    </p>
+  </section>
+  <section
+    className="reminders"
+  >
+    <h2
+      className="reminders-title"
+    >
+      Reminders
+    </h2>
+    <p
+      className="no-events"
+    >
+      No Reminders
+    </p>
+    <div
+      className="reminder-input"
+    >
+      <input />
+      <button
+        onClick={[Function]}
+      >
+        Add
+      </button>
+    </div>
+  </section>
+</div>
+`;
+
+exports[`components <Month/> renders 1`] = `
+<div
+  className="month"
+>
+  <h2>
+    enero
+     
+    2017
+  </h2>
+  <ul
+    className="month-names"
+  >
+    <li>
+      <p>
+        Mon
+      </p>
+    </li>
+    <li>
+      <p>
+        Tue
+      </p>
+    </li>
+    <li>
+      <p>
+        Wed
+      </p>
+    </li>
+    <li>
+      <p>
+        Thu
+      </p>
+    </li>
+    <li>
+      <p>
+        Fri
+      </p>
+    </li>
+    <li>
+      <p>
+        Sat
+      </p>
+    </li>
+    <li>
+      <p>
+        Sun
+      </p>
+    </li>
+  </ul>
+  <ul
+    className="month-days"
+  />
+</div>
+`;
+
+exports[`components <Movie/> renders 1`] = `
+<div
+  className="movie"
+>
+  <div
+    className="title"
+  >
+    <h3
+      className="title-p"
+    >
+      Colossal
+    </h3>
+    <p
+      className="title-over"
+    >
+      A woman discovers that severe catastrophic events are somehow connected to the mental breakdown from which she's suffering.
+    </p>
+  </div>
+  <div
+    className="image"
+  >
+    <img
+      alt="Colossal"
+      src="http://image.tmdb.org/t/p/w500/4VOyofBd1pexblxtDZYtYIk7NI4.jpg"
+    />
+  </div>
+</div>
+`;
+
+exports[`components <Reminder/> renders 1`] = `
+<div
+  className="reminder"
+>
+  <p>
+    Reminder 45
+  </p>
+</div>
+`;

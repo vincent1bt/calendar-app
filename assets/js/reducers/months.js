@@ -15,11 +15,13 @@ const months = (state = Map(), action) => {
 }
 
 function addEvent(state, action) {
-  const monthString = action.monthId.toString();
-  if(state.get(monthString).get("events").includes(action.eventId)) {
+  const monthId = action.monthId.toString();
+  const month = state.get(monthId);
+
+  if(month && month.get("events").includes(action.eventId)) {
     return state;
   } else {
-    return state.updateIn([monthString, "events"], (events) => {
+    return state.updateIn([monthId, "events"], (events) => {
       return events.push(action.eventId);
     });
   }

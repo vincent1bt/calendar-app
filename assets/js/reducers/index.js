@@ -5,7 +5,7 @@ import events from 'reducers/events';
 import reminders from 'reducers/reminders';
 import movies from 'reducers/movies';
 
-const app = combineReducers({
+const reducers = combineReducers({
   currentDate,
   months,
   events,
@@ -13,4 +13,4 @@ const app = combineReducers({
   reminders
 });
 
-export default app;
+export default reducers;

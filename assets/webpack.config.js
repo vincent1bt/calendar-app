@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   entry: {
     index: __dirname + "/js/index.js"
@@ -7,7 +9,7 @@ module.exports = {
     path: __dirname + "/../static"
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js?$/,
         exclude: /node_modules/,
@@ -19,8 +21,10 @@ module.exports = {
     ]
   },
   resolve: {
-    root: __dirname + "/js",
-    extensions: ["", ".js"],
-    moduleDirectories: ["node_modules"]
-  }
+    modules: [
+      path.resolve(__dirname, 'js'),
+      'node_modules'
+    ]
+  },
+  target: 'web',
 }

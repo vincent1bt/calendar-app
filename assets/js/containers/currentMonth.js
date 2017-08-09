@@ -3,10 +3,11 @@ import { getDataMonth } from 'helpers/getDataFromMonth';
 import Month from 'components/Month';
 
 const mapStateToProps = (state, ownProps) => {
-  let id = ownProps.params.monthId;
+  let id = ownProps.match.params.monthId;
   let month;
   let name = "";
   let arrayLi = [];
+
   if(id === undefined) {
     const date = state.app.currentDate;
     if(state.app.months.isEmpty()) {

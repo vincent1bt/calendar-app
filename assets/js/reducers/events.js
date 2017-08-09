@@ -16,6 +16,7 @@ const events = (state = Map(), action) => {
 
 function addReminder(state, action) {
   const stringId = action.eventId.toString();
+
   if(state.get(stringId)) {
     return state.updateIn([stringId, "reminders"], (reminders) => {
       return reminders.push(action.reminderId);
